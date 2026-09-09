@@ -1,6 +1,22 @@
 from flask import Flask, request, redirect, render_template
+from flask_hot_reload import HotReload
 
 app = Flask(__name__)
+
+# we have to use the external dependency of flask_hot_reload so everytime we update a file the page updates automatically.
+# this is just a template that the pip extension gives, and works just well for what we need.
+hot_reload = HotReload(app, 
+    includes=[
+        'templates',  # template directory
+        'static',     # static files directory
+        '.'          # current directory
+    ],
+    excludes=[
+        '__pycache__',
+        'node_modules',
+        '.git'
+    ]
+)
 
 @app.route("/")
 def index():
@@ -51,5 +67,5 @@ def login_page():
 def register_page():
     return render_template("register_page.html")
 
-
-app.run(debug = True)
+if __name__ == '__main__':
+    app.run(debug=True)
