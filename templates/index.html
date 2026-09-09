@@ -5,12 +5,55 @@
 
 <body>
 
-    <div class = "bg" />
+    <div class="bg" />
 
-    <div class="flex flex-col items-center justify-center h-[10%] text-white">
+    <!-- title -->
+    <div class="flex flex-col items-center justify-center h-[11%] text-white">
         <h1 class="text-xl">Snippet saver</h1>
         <p>A page to save code snippets quick and easy.</p>
     </div>
 
+    <!-- add snippet -->
+    <div class="flex flex-col w-full h-[40%] p-[20px] gap-2 items-center justify-center text-white add_snippet_flex">
 
+        <!-- title -->
+        <h1 class="text-lg">Add a new snippet</h1>
+
+        <!-- form wrapper -->
+        <div class="flex w-full h-[85%] items-center justify-center">
+
+            <!-- form -->
+            <form class="flex flex-row gap-5 h-full" method="POST">
+
+                <div class="flex flex-col gap-2 relative">
+
+                    <div class="input_wrapper">
+                        <p>Name</p>
+                        <input type="text" class="add_snippet_input" placeholder="Snippet name" required/>
+                    </div>
+
+                    <div class="input_wrapper">
+                        <p>Language</p>
+                        <input type="text" class="add_snippet_input" placeholder="Snippet language" required />
+                    </div>
+
+                    <!-- we use margin top to get the non absolute positioned object (the button) down the flex. -->
+                    <button class="bg-[#4B4038] w-full h-[40px] mt-auto hover:opacity-[0.8]">Add</button>
+
+                </div>
+
+                <div class="input_wrapper">
+                    <p>Snippet</p>
+                    <textarea class="h-full w-[500px] add_snippet_input" placeholder="Insert your snippet" required></textarea>
+                </div>
+
+                <div class="input_wrapper">
+                    <p>Description</p>
+                    <textarea class="h-full w-[300px] add_snippet_input" placeholder="Add a description"></textarea>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
 </body>

@@ -12,16 +12,43 @@
 body {
     background-color: #9A8678;
 
-  background-image:
-    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
 
-    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
 
-  background-size:
-    20px 20px,
-    20px 20px,
-    100px 100px,
-    100px 100px;
+    background-size:
+        20px 20px,
+        20px 20px,
+        100px 100px,
+        100px 100px;
+}
+
+.add_snippet_flex {
+    background-color: #03030336;
+}
+
+.add_snippet_input {
+    padding: 5px;
+    color: black;
+    border: 2px solid transparent;
+
+    width: 250px;
+
+    font-size: 12px;
+
+    transition: 0.1s;
+}
+
+.add_snippet_input:focus {
+    outline: none;
+    border: 2px solid #4B4038;
+}
+
+.input_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
