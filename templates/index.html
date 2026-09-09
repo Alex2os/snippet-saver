@@ -11,6 +11,12 @@
     <div class="flex flex-col items-center justify-center h-[11%] text-white">
         <h1 class="text-xl">Snippet saver</h1>
         <p>A page to save code snippets quick and easy.</p>
+
+        <!-- login/register and logout buttons-->
+        <div class="absolute right-[30px] flex flex-row gap-5 text-center text-black">
+            <a href = "/login_page" class="account_button login">Login</a>
+            <a href = "/register_page" class="account_button register">Register</a>
+        </div>
     </div>
 
     <!-- add snippet -->
@@ -23,18 +29,20 @@
         <div class="flex w-full h-[85%] items-center justify-center">
 
             <!-- form -->
-            <form class="flex flex-row gap-5 h-full" method="POST">
+            <form class="flex flex-row gap-5 h-full" method="POST" action="/snippets/new">
 
                 <div class="flex flex-col gap-2 relative">
 
                     <div class="input_wrapper">
                         <p>Name</p>
-                        <input type="text" class="add_snippet_input" placeholder="Snippet name" required/>
+                        <input name="snippet_name" type="text" class="add_snippet_input" placeholder="Snippet name"
+                            required />
                     </div>
 
                     <div class="input_wrapper">
                         <p>Language</p>
-                        <input type="text" class="add_snippet_input" placeholder="Snippet language" required />
+                        <input name="snippet_language" type="text" class="add_snippet_input"
+                            placeholder="Snippet language" required />
                     </div>
 
                     <!-- we use margin top to get the non absolute positioned object (the button) down the flex. -->
@@ -44,16 +52,39 @@
 
                 <div class="input_wrapper">
                     <p>Snippet</p>
-                    <textarea class="h-full w-[500px] add_snippet_input" placeholder="Insert your snippet" required></textarea>
+                    <textarea name="snippet_code" class="h-full w-[500px] add_snippet_input"
+                        placeholder="Insert your snippet" required></textarea>
                 </div>
 
                 <div class="input_wrapper">
                     <p>Description</p>
-                    <textarea class="h-full w-[300px] add_snippet_input" placeholder="Add a description"></textarea>
+                    <textarea name="snippet_description" class="h-full w-[300px] add_snippet_input"
+                        placeholder="Add a description"></textarea>
                 </div>
 
             </form>
 
         </div>
     </div>
+
+    <!-- snippets' list -->
+    <div class="flex flex-row gap-3 p-[20px]">
+
+        {% for snippet in snippets %}
+
+        <a class="saved_snippet">
+            <div>
+                <h2>Name: {{ snippet.title }}</h2>
+
+                <p>Lang: {{ snippet.language }}</p>
+            </div>
+
+            <div class="w-full h-full bg-[#2e2e2e] p-[5px] rounded-[3px] border-solid border-[1px] border-[#5e5e5e]">
+                <pre>{{ snippet.code }}</pre>
+            </div>
+        </a>
+
+        {% endfor %}
+    </div>
+
 </body>
