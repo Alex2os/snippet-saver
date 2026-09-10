@@ -43,17 +43,19 @@
             <!-- form -->
             <form class="flex flex-row gap-5 h-full" method="POST" action="/snippets/new">
 
+                {{ form.hidden_tag() }}
+
                 <div class="flex flex-col gap-2 relative">
 
                     <div class="input_wrapper">
                         <p>Name</p>
-                        <input name="snippet_name" type="text" class="add_snippet_input" placeholder="Snippet name"
+                        <input name="name" type="text" class="add_snippet_input" placeholder="Snippet name"
                             required />
                     </div>
 
                     <div class="input_wrapper">
                         <p>Language</p>
-                        <input name="snippet_language" type="text" class="add_snippet_input"
+                        <input name="language" type="text" class="add_snippet_input"
                             placeholder="Snippet language" required />
                     </div>
 
@@ -64,13 +66,13 @@
 
                 <div class="input_wrapper">
                     <p>Snippet</p>
-                    <textarea name="snippet_code" class="h-full w-[500px] add_snippet_input"
+                    <textarea name="code" class="h-full w-[500px] add_snippet_input"
                         placeholder="Insert your snippet" required></textarea>
                 </div>
 
                 <div class="input_wrapper">
                     <p>Description</p>
-                    <textarea name="snippet_description" class="h-full w-[300px] add_snippet_input"
+                    <textarea name="description" class="h-full w-[300px] add_snippet_input"
                         placeholder="Add a description"></textarea>
                 </div>
 
@@ -86,13 +88,13 @@
 
         <a class="saved_snippet">
             <div>
-                <h2>Name: {{ snippet.title }}</h2>
+                <h2>Name: {{ snippet.snippet_name }}</h2>
 
-                <p>Lang: {{ snippet.language }}</p>
+                <p>Lang: {{ snippet.snippet_language }}</p>
             </div>
 
             <div class="w-full h-full bg-[#2e2e2e] p-[5px] rounded-[3px] border-solid border-[1px] border-[#5e5e5e]">
-                <pre>{{ snippet.code }}</pre>
+                <pre>{{ snippet.snippet_code }}</pre>
             </div>
         </a>
 

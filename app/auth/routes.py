@@ -41,6 +41,7 @@ def auth_login_user():
 
         return redirect("/")
 
+    print(form.errors)
     return "Form validation failed", 400
 
 @auth.route("/auth/logout")
