@@ -4,6 +4,7 @@ from dotenv import load_dotenv # library to load .env files. this is for environ
 from flask_hot_reload import HotReload # hot reload library
 from flask_sqlalchemy import SQLAlchemy # sql toolkit for python
 from flask_bcrypt import Bcrypt # library that helps us to hash users' passwords
+from flask_login import LoginManager # login manager from flask
 
 # it's to be said that other files that want to use this variable can just import it and use it as they need it
 # in general, declaring variables here like db or bcrypt makes them accesible to all the files, so this is very handy.
@@ -11,6 +12,9 @@ db = SQLAlchemy()
 
 # we define a variable to use bcrypt. 
 bcrypt = Bcrypt()
+
+# we define our login manager
+# login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
@@ -34,6 +38,8 @@ def create_app():
     db.init_app(app)
     # we initialize the bcrypt variable
     bcrypt.init_app(app)
+    # we initialize our login manager
+    # login_manager.init_app(app)
 
     # we have to use the external dependency of flask_hot_reload so everytime we update a file the page updates automatically.
     # this is just a template that the pip extension gives, and works just well for what we need.

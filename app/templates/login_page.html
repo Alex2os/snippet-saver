@@ -18,16 +18,18 @@
 
         <div class="flex flex-col justify-center items-center h-[80%] w-[550px] bg-[#03030336]">
 
-            <form class="flex flex-col gap-3 items-center justify-center w-[40%]">
+            <form class="flex flex-col gap-3 items-center justify-center w-[40%]" method = "POST" action = "/auth/login_user">
+
+                {{ form.hidden_tag() }}
 
                 <div class = "input_wrapper">
                     <p>Username</p>
-                    <input type="text" placeholder="Enter username" required />
+                    <input name = "username" type="text" placeholder="Enter username" required />
                 </div>
 
                 <div class = "input_wrapper">
                     <p>Password</p>
-                    <input type="password" placeholder="Enter password" required />
+                    <input name = "password" type="password" placeholder="Enter password" required />
                 </div>
 
                 <button class = "login_button login">Login</button>
