@@ -14,9 +14,20 @@
         <p>A page to save code snippets quick and easy.</p>
 
         <!-- login/register and logout buttons-->
-        <div class="absolute right-[30px] flex flex-row gap-5 text-center text-black">
+        <div
+            class="flex flex-row justify-center items-center absolute right-[30px] flex flex-row gap-5 text-center text-black">
+
+            <!-- the login manager injects the templates with current_user, so we can use it here without passing anything in the route to the page.-->
+            {% if current_user.is_authenticated %}
+            <div class="flex flex-col justify-center items-center gap-2">
+                <p class="text-white">Hello, {{ current_user.user_username }}</p>
+                <a href = "/auth/logout" class = "account_button logout"">Logout</a>
+            </div>
+            {% else %}
             <a href="/login_page" class="account_button login">Login</a>
             <a href="/register_page" class="account_button register">Register</a>
+            {% endif %}
+
         </div>
     </div>
 

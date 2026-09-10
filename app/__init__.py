@@ -14,7 +14,7 @@ db = SQLAlchemy()
 bcrypt = Bcrypt()
 
 # we define our login manager
-# login_manager = LoginManager()
+login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
@@ -39,7 +39,9 @@ def create_app():
     # we initialize the bcrypt variable
     bcrypt.init_app(app)
     # we initialize our login manager
-    # login_manager.init_app(app)
+    login_manager.init_app(app)
+    # we then set where the users that are not authenticated when trying to access protected routes. in this case we just send them to the login_page.
+    login_manager.login_view = "auth.login_page"
 
     # we have to use the external dependency of flask_hot_reload so everytime we update a file the page updates automatically.
     # this is just a template that the pip extension gives, and works just well for what we need.

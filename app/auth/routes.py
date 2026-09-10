@@ -1,5 +1,6 @@
 # libraries for data validation inside requests, like [Required] in dotnet/c#
 from flask import Blueprint, render_template, request, redirect
+from flask_login import login_user, logout_user, login_required # functions that help with login, logout and protected routes
 from app.forms import RegisterUserForm, LoginUserForm
 from app.models import Users
 from app import db, bcrypt
@@ -14,7 +15,7 @@ def login_page():
     return render_template("login_page.html", form = form)
 
 @auth.route("/auth/login_user", methods = ["POST"])
-def login_user():
+def auth_login_user():
 
     form = LoginUserForm()
 
@@ -33,9 +34,20 @@ def login_user():
         if(not bcrypt.check_password_hash(user.user_hashed_password, password)):
             return "Data entered is incorrect", 400
 
+        # by doing this (function from flask_login) we can login the user correctly if all the other checks passed.
+        # some things of flask are great as you don't have to do the heavy work (like in dotnet, where you had to set a whole jwt thing and stuff like that). in-
+        # this case flask makes the session for us.
+        login_user(user)
+
         return redirect("/")
 
     return "Form validation failed", 400
+
+@auth.route("/auth/logout")
+@login_required
+def user_logout():
+    logout_user()
+    return redirect("/")
 
 
 @auth.route("/register_page")
@@ -46,7 +58,7 @@ def register_page():
     return render_template("register_page.html", form = form)
 
 @auth.route("/auth/register_user", methods = ["POST"])
-def register_user():
+def auth_register_user():
     # there's no need to do an if request.method == "POST" here, as the request will only enter if it's only a post anyways, due to the methods declared in the route previously.
     print("register user started.")
 
