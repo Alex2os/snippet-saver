@@ -8,8 +8,39 @@
 
     <div class="bg" />
 
+    <form id = "edit_snippet_modal" class="edit_snippet_modal hidden">
+
+        <h1 class="text-xl">Edit snippet</h1>
+
+        <div class="edit_snippet_input_wrapper">
+            <p>Name</p>
+            <input id="edit_snippet_name" class="edit_snippet_input" />
+        </div>
+
+        <div class="edit_snippet_input_wrapper">
+            <p>Language</p>
+            <input id="edit_snippet_language" class="edit_snippet_input" />
+        </div>
+
+        <div class="edit_snippet_textarea_wrapper code">
+            <p>Code</p>
+            <textarea id="edit_snippet_code" class="edit_snippet_input code"></textarea>
+        </div>
+
+        <div class="edit_snippet_textarea_wrapper description">
+            <p>Description</p>
+            <textarea id="edit_snippet_description" class="edit_snippet_input code"></textarea>
+        </div>
+
+        <div class="flex flex-row gap-5 w-full items-center justify-center h-[40px]">
+            <button id = "edit_snippet_button_cancel" class = "edit_snippet_button cancel" type="button">Cancel</button> <!-- normal button (specifying it in the type)-->
+            <button class = "edit_snippet_button save_changes" type="submit">Save changes</button> <!-- button for submit (specifying it in the type)-->
+        </div>
+
+    </form>
+
     <!-- title -->
-    <div class="flex flex-col items-center justify-center h-[11%] text-white">
+    <div class="flex flex-col items-center justify-center h-[6rem] text-white">
         <h1 class="text-xl">Snippet saver</h1>
         <p>A page to save code snippets quick and easy.</p>
 
@@ -32,7 +63,8 @@
         </div>
 
         <!-- add snippet -->
-        <div class="flex flex-col w-full h-[40%] p-[20px] gap-2 items-center justify-center text-white bg-[#03030336]">
+        <div
+            class="flex flex-col w-full h-[25rem] p-[20px] gap-2 items-center justify-center text-white bg-[#03030336]">
 
             <!-- title -->
             <h1 class="text-lg">Add a new snippet</h1>
@@ -60,7 +92,8 @@
                         </div>
 
                         <!-- we use margin top to get the non absolute positioned object (the button) down the flex. -->
-                        <button class="bg-[#4B4038] w-full h-[40px] mt-auto hover:opacity-[0.8]">Add</button>
+                        <button type="submit"
+                            class="bg-[#4B4038] w-full h-[40px] mt-auto hover:opacity-[0.8]">Add</button>
 
                     </div>
 
@@ -112,11 +145,16 @@
                     </form>
 
                     <div class="snippet_card_button_wrapper">
-                        <button class="snippet_card_button edit">Edit</button>
+                        <button class="snippet_card_button edit"
+                        data-snippet_name = "{{snippet.snippet_name}}"
+                        data-snippet_language = "{{snippet.snippet_language}}"
+                        data-snippet_code = "{{snippet.snippet_code}}"
+                        data-snippet_description = "{{snippet.snippet_description}}">Edit</button>
                     </div>
 
                     <div class="snippet_card_button_wrapper">
-                        <button class="snippet_card_button copy">Copy</button>
+                        <button class="snippet_card_button copy"
+                            data-snippet_code="{{ snippet.snippet_code}}">Copy</button>
                     </div>
 
                 </div>
@@ -126,4 +164,6 @@
         </div>
     </div>
 
+    <script src="../static/js/copyToClipboard.js"></script>
+    <script src="../static/js/getEditSnippetPageData.js"></script>
 </body>

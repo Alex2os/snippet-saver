@@ -21,7 +21,7 @@
     gap: 5px;
 }
 
-.saved_snippet{
+.saved_snippet {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -50,6 +50,7 @@
         100px 100px,
         100px 100px;
 }
+
 /*
 .saved_snippet:hover{
     cursor: pointer;
@@ -57,7 +58,7 @@
 }
     */
 
-.account_button{
+.account_button {
     padding: 5px;
     width: 100px;
     user-select: none;
@@ -65,24 +66,24 @@
     transition: 0.1s;
 }
 
-.account_button:hover{
+.account_button:hover {
     opacity: 0.8;
     cursor: pointer;
 }
 
-.account_button.login{
+.account_button.login {
     background-color: #fce6a9;
 }
 
-.account_button.register{
+.account_button.register {
     background-color: #aad6fa;
 }
 
-.account_button.logout{
+.account_button.logout {
     background-color: #ff746c;
 }
 
-.snippet_card_button{
+.snippet_card_button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -97,7 +98,7 @@
     transition: 0.1s;
 }
 
-.snippet_card_button:hover{
+.snippet_card_button:hover {
     opacity: 0.8;
     cursor: pointer;
 }
@@ -115,12 +116,128 @@
 }
 */
 
-.snippet_card_button.erase{
+.snippet_card_button.erase {
     background-color: #834e4e;
     border: 1px solid #fca9a9;
 }
 
-.snippet_card_button_wrapper{
+.snippet_card_button_wrapper {
     height: 100%;
     width: 33%;
+}
+
+/* seems like using translateX and then translateY overwrites the translateX, so here we use translate to solve this.*/
+.edit_snippet_modal {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    color: white;
+
+    padding: 10px;
+
+    justify-content: start;
+    align-items: center;
+
+    height: 40rem;
+    width: 30rem;
+
+    position: absolute;
+
+    z-index: 10;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 3px;
+    border: 1px solid #5e5e5e;
+    background-color: #2e2e2e;
+
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+
+    background-size:
+        20px 20px,
+        20px 20px,
+        100px 100px,
+        100px 100px;
+}
+
+.edit_snippet_input_wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    & p {
+        display: flex;
+        justify-content: end;
+        width: 100px;
+    }
+}
+
+.edit_snippet_textarea_wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: start;
+    justify-content: center;
+}
+
+.edit_snippet_textarea_wrapper.code {
+    height: 40%;
+}
+
+.edit_snippet_textarea_wrapper.description {
+    height: 20%;
+}
+
+.edit_snippet_input {
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #5e5e5e;
+    color: white;
+    font-size: 12px;
+
+    background-color: #2e2e2e;
+
+    width: 100%;
+    height: auto;
+
+    transition: 0.1s;
+}
+
+.edit_snippet_input:focus {
+    outline: none;
+    border: 1px solid #a9fcf8;
+}
+
+.edit_snippet_input.code {
+    height: 80%;
+}
+
+.edit_snippet_button {
+    width: 50%;
+    height: 100%;
+
+    transition: 0.1s;
+}
+
+.edit_snippet_button:hover {
+    opacity: 0.8;
+}
+
+.edit_snippet_button.save_changes {
+    background-color: #aad6fa;
+    color: black;
+}
+
+.edit_snippet_button.cancel {
+    background-color: #2e2e2e;
+    border: 1px solid #5e5e5e;
+    color: white;
 }
