@@ -31,9 +31,23 @@ def new_snippet():
     print(form.errors)
     return "Form validation failed", 400
 
+# when we create the route, we specify that it will receive a parameter. in this case it receives the snippet_id, with which we can work then here.
+@snippets.route("/snippets/<int:snippet_id>/erase", methods = ["POST"])
+@login_required
+def erase_snippet(snippet_id):
 
+    # we obtain the snippet and at the same time check if the user_id is the same as the current_user id.
+    snippet = Snippets.query.filter_by(snippet_id = snippet_id, user_id = current_user.user_id).first()
 
+    if(snippet):
+        db.session.delete(snippet)
+        db.session.commit()
 
+        print("snippet erased successfully")
+
+        return redirect("/")
+
+    return "The snippet could not be erased.", 400
 
 
 # previous code for getting the new snippet data request. just for testing/learning
