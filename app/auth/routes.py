@@ -1,6 +1,8 @@
 # libraries for data validation inside requests, like [Required] in dotnet/c#
 from flask import Blueprint, render_template, request, redirect
 from app.forms import RegisterUserForm
+from app.models import Users
+from app import db, bcrypt
 
 auth = Blueprint("auth", __name__)
 
@@ -10,9 +12,12 @@ def login_page():
 
 @auth.route("/register_page")
 def register_page():
-    return render_template("register_page.html")
 
-@auth.route("/register_user", methods = ["POST"])
+    form = RegisterUserForm()
+
+    return render_template("register_page.html", form = form)
+
+@auth.route("/auth/register_user", methods = ["POST"])
 def register_user():
     # there's no need to do an if request.method == "POST" here, as the request will only enter if it's only a post anyways, due to the methods declared in the route previously.
     print("register user started.")
@@ -22,7 +27,27 @@ def register_user():
 
     # if the form validates everything correctly, we get the values to proceed to registering them.
     if (form.validate_on_submit()):
-        register_username = form.username.data
-        register_password = form.password.data
+        username = form.username.data
+        password = form.password.data
 
-        
+        hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
+
+        new_user = Users(user_username = username, user_hashed_password = hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        print("user created correctly")
+
+        return redirect("/login_page")
+
+    print(form.errors)
+    return "Form validation failed", 400
+
+
+
+
+
+
+
+
+

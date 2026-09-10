@@ -3,9 +3,14 @@ from flask import Flask
 from dotenv import load_dotenv # library to load .env files. this is for environment variables
 from flask_hot_reload import HotReload # hot reload library
 from flask_sqlalchemy import SQLAlchemy # sql toolkit for python
+from flask_bcrypt import Bcrypt # library that helps us to hash users' passwords
 
 # it's to be said that other files that want to use this variable can just import it and use it as they need it
+# in general, declaring variables here like db or bcrypt makes them accesible to all the files, so this is very handy.
 db = SQLAlchemy()
+
+# we define a variable to use bcrypt. 
+bcrypt = Bcrypt()
 
 def create_app():
     app = Flask(__name__)
@@ -16,6 +21,8 @@ def create_app():
     # we configure the database uri (using our database connection string. this is already set up in the .env files)
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_CONNECTION_STRING")
 
+    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+        
     from app.auth.routes import auth
     from app.snippets.routes import snippets
 
@@ -24,7 +31,9 @@ def create_app():
 
     # we initialize the db with the app object. now other files can import the db variable and use for whatever reason they need.
     # we obtain the db variable here, using the app.config with sqlalchemy we previously configured. we just do init_app here to do so.
-    db.init_app(app) 
+    db.init_app(app)
+    # we initialize the bcrypt variable
+    bcrypt.init_app(app)
 
     # we have to use the external dependency of flask_hot_reload so everytime we update a file the page updates automatically.
     # this is just a template that the pip extension gives, and works just well for what we need.
