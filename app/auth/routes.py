@@ -30,6 +30,10 @@ def register_user():
         username = form.username.data
         password = form.password.data
 
+        # we can check if the username already exists by filtering in the database using the following command:
+        if(Users.query.filter_by(user_username = username).first()):
+            return "Username already existing.", 409 # we return a conflict message.
+
         hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
 
         new_user = Users(user_username = username, user_hashed_password = hashed_password)

@@ -28,6 +28,7 @@
     justify-content: center;
     width: 100%;
     height: 30px;
+    color: black;
 
     user-select: none;
 
@@ -40,16 +41,13 @@
 }
 
 .login_button.login {
-    color: black;
     background-color: #fce6a9;
 }
 
 .login_button.return {
-    color: white;
-    background-color: #202940;
+    background-color: #ff746c;
 }
 
 .login_button.register {
-    color: black;
     background-color: #aad6fa;
 }
