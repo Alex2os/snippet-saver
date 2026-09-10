@@ -1,7 +1,33 @@
+import os
 from flask import Flask, request, redirect, render_template
-from flask_hot_reload import HotReload
+from flask_hot_reload import HotReload # hot reload library
+from flask_sqlalchemy import SQLAlchemy # sql toolkit for python
+from dotenv import load_dotenv # library to load .env files. this is for environment variables
+
+# we load the dotenv files
+load_dotenv()
 
 app = Flask(__name__)
+
+# we configure the database uri (using our database connection string. this is already set up in the .env files)
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_CONNECTION_STRING")
+
+# we obtain the db variable here, using the app.config with sqlalchemy we previously configured.
+db = SQLAlchemy(app)
+
+# we declare a class that will refer to the database model or table. in this case we specify the name (__tablename__ = "snippets" in this case)-
+# and we define the proper columns, specifying the types and constraints (constraints like not null, unique, primary key, etc.)
+# later we can use this model to get information from the database, making it able to connect to the db properly.
+
+# class for snippets table inside database.
+class Snippets(db.Model):
+    __tablename__ = "snippets"
+
+    snippet_id = db.Column(db.Integer, primary_key=True)
+    snippet_name = db.Column(db.String(100), nullable=False)
+    snippet_language = db.Column(db.String(50), nullable=False)
+    snippet_code = db.Column(db.String(), nullable=False)
+    snippet_description = db.Column(db.String())
 
 # we have to use the external dependency of flask_hot_reload so everytime we update a file the page updates automatically.
 # this is just a template that the pip extension gives, and works just well for what we need.
