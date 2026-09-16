@@ -45,8 +45,8 @@ class LoginUserForm(FlaskForm):
         ]
     )
 
-# form for creating snippets
-class CreateSnippetForm(FlaskForm):
+# form for creating snippets and editing them. as both need the same information, we use this two.
+class SnippetForm(FlaskForm):
 
     name = StringField(
         "name",

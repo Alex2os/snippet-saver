@@ -1,5 +1,5 @@
 from flask import Blueprint, request, redirect, render_template
-from app.forms import CreateSnippetForm
+from app.forms import SnippetForm
 from app.models import Snippets
 from flask_login import current_user, login_required
 from app import db
@@ -9,7 +9,7 @@ snippets = Blueprint("snippets", __name__)
 @snippets.route("/snippets/new", methods = ["POST"])
 @login_required
 def new_snippet():
-    form = CreateSnippetForm()
+    form = SnippetForm()
 
     if(form.validate_on_submit()):
 
@@ -48,6 +48,33 @@ def erase_snippet(snippet_id):
         return redirect("/")
 
     return "The snippet could not be erased.", 400
+
+@snippets.route("/snippets/<int:snippet_id>/edit", methods = ["POST"])
+@login_required
+def edit_snippet(snippet_id):
+    form = SnippetForm()
+
+    if(form.validate_on_submit()):
+
+        snippet = Snippets.query.filter_by(snippet_id = snippet_id, user_id = current_user.user_id).first()
+
+        if(not snippet):
+            return "The snippet does not exists", 400
+
+        # we can just change the snippet values here and then commit, and this will work to update or edit the row inside the database.
+        snippet.snippet_name = form.name.data
+        snippet.snippet_language = form.language.data
+        snippet.snippet_code = form.code.data
+        snippet.snippet_description = form.description.data
+
+        db.session.commit()
+
+        print("snippet with id: ", snippet_id, "edited correctly.")
+
+        return redirect("/")
+
+    print(form.errors)
+    return "Form validation failed", 404
 
 
 # previous code for getting the new snippet data request. just for testing/learning

@@ -8,33 +8,38 @@
 
     <div class="bg" />
 
-    <form id = "edit_snippet_modal" class="edit_snippet_modal hidden">
+    <form action="" id="edit_snippet_form"
+        class="edit_snippet_form hidden" method = "POST">
+
+        {{ form.hidden_tag() }}
 
         <h1 class="text-xl">Edit snippet</h1>
 
         <div class="edit_snippet_input_wrapper">
             <p>Name</p>
-            <input id="edit_snippet_name" class="edit_snippet_input" />
+            <input name = "name" id="edit_snippet_name" class="edit_snippet_input" />
         </div>
 
         <div class="edit_snippet_input_wrapper">
             <p>Language</p>
-            <input id="edit_snippet_language" class="edit_snippet_input" />
+            <input name = "language" id="edit_snippet_language" class="edit_snippet_input" />
         </div>
 
         <div class="edit_snippet_textarea_wrapper code">
             <p>Code</p>
-            <textarea id="edit_snippet_code" class="edit_snippet_input code"></textarea>
+            <textarea name = "code" id="edit_snippet_code" class="edit_snippet_input code"></textarea>
         </div>
 
         <div class="edit_snippet_textarea_wrapper description">
             <p>Description</p>
-            <textarea id="edit_snippet_description" class="edit_snippet_input code"></textarea>
+            <textarea name = "description" id="edit_snippet_description" class="edit_snippet_input description"></textarea>
         </div>
 
         <div class="flex flex-row gap-5 w-full items-center justify-center h-[40px]">
-            <button id = "edit_snippet_button_cancel" class = "edit_snippet_button cancel" type="button">Cancel</button> <!-- normal button (specifying it in the type)-->
-            <button class = "edit_snippet_button save_changes" type="submit">Save changes</button> <!-- button for submit (specifying it in the type)-->
+            <button id="edit_snippet_button_cancel" class="edit_snippet_button cancel" type="button">Cancel</button>
+            <!-- normal button (specifying it in the type)-->
+            <button class="edit_snippet_button save_changes" type="submit">Save changes</button>
+            <!-- button for submit (specifying it in the type)-->
         </div>
 
     </form>
@@ -128,7 +133,18 @@
 
                 <div
                     class="w-full h-[77%] bg-[#2e2e2e] p-[5px] rounded-[3px] border-solid border-[1px] border-[#5e5e5e]">
-                    <pre>{{ snippet.snippet_code }}</pre>
+
+                    <div class="overflow-y-auto w-full h-[70%]">
+                        <pre>{{ snippet.snippet_code }}</pre>
+                    </div>
+
+                    <div class="w-full h-[1px] bg-[#5e5e5e]"></div>
+
+                    <div class="overflow-y-auto w-full h-[30%]">
+                        <p>Description:</p>
+                        <p>{{ snippet.snippet_description }}</p>
+                    </div>
+
                 </div>
 
                 <!-- erase, edit and copy buttons-->
@@ -145,11 +161,11 @@
                     </form>
 
                     <div class="snippet_card_button_wrapper">
-                        <button class="snippet_card_button edit"
-                        data-snippet_name = "{{snippet.snippet_name}}"
-                        data-snippet_language = "{{snippet.snippet_language}}"
-                        data-snippet_code = "{{snippet.snippet_code}}"
-                        data-snippet_description = "{{snippet.snippet_description}}">Edit</button>
+                        <button class="snippet_card_button edit" data-snippet_name="{{snippet.snippet_name}}"
+                            data-snippet_id="{{snippet.snippet_id}}"
+                            data-snippet_language="{{snippet.snippet_language}}"
+                            data-snippet_code="{{snippet.snippet_code}}"
+                            data-snippet_description="{{snippet.snippet_description}}">Edit</button>
                     </div>
 
                     <div class="snippet_card_button_wrapper">

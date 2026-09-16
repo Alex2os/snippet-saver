@@ -127,7 +127,7 @@
 }
 
 /* seems like using translateX and then translateY overwrites the translateX, so here we use translate to solve this.*/
-.edit_snippet_modal {
+.edit_snippet_form {
     display: flex;
     flex-direction: column;
     gap: 20px;
